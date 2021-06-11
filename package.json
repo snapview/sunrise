@@ -7,7 +7,8 @@
     "scripts": {
         "test": "jest",
         "build": "rollup -c",
-        "format": "prettier --write ."
+        "format": "prettier --write .",
+        "prepare": "husky install"
     },
     "files": [
         "lib",
@@ -19,11 +20,16 @@
     "license": "MIT",
     "devDependencies": {
         "@types/jest": "^26.0.23",
+        "husky": "^6.0.0",
         "jest": "^27.0.4",
+        "lint-staged": "^11.0.0",
         "prettier": "2.3.1",
         "rollup": "^2.51.2",
         "rollup-plugin-typescript2": "^0.30.0",
         "ts-jest": "^27.0.3",
         "typescript": "^4.3.2"
+    },
+    "lint-staged": {
+        "**/*": "prettier --write --ignore-unknown"
     }
 }
