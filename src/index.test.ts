@@ -15,11 +15,10 @@ import {
     subscribe,
     unsubscribe,
     OperationOnDestroyedCellError,
-    Recalculable,
-    Destroyable,
-} from './sunrise'
+} from './index'
 
-global.setTimeout = (fn: Function, timeout: number) => fn()
+// @ts-ignore
+global.setTimeout = (fn: Function, timeout?: number) => fn()
 
 const inc = (x: number) => x + 1
 const sum = (...nums: number[]) =>
