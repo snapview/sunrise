@@ -5,17 +5,23 @@
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "build": "rollup -c"
   },
-  "files": ["lib", "package.json"],
+  "files": [
+    "lib",
+    "package.json"
+  ],
   "types": "lib/index.d.ts",
   "keywords": [],
   "author": "Denis Krivosheev",
   "license": "MIT",
   "devDependencies": {
+    "@types/jest": "^26.0.23",
+    "jest": "^27.0.4",
     "rollup": "^2.51.2",
     "rollup-plugin-typescript2": "^0.30.0",
+    "ts-jest": "^27.0.3",
     "typescript": "^4.3.2"
   }
 }
