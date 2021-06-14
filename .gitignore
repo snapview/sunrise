@@ -12,3 +12,4 @@ yarn-error.log*
 .npm
 .eslintcache
 lib/
+coverage/

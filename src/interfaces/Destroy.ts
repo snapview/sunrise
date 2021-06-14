@@ -1,5 +1,4 @@
 import { hasMethods } from '../Utils'
-import { Cell } from './Cell'
 
 export interface Destroyable {
     destroy(): void
@@ -7,7 +6,7 @@ export interface Destroyable {
 }
 
 export function isDestroyable(val: any): val is Destroyable {
-    return hasMethods<Destroyable>(val, ['isDestroyed'])
+    return hasMethods<Destroyable>(val, ['isDestroyed', 'destroy'])
 }
 
 export function destroy(val: any): void {
@@ -16,6 +15,10 @@ export function destroy(val: any): void {
     }
 }
 
-export function isDestroyed(val: Cell<any>): boolean {
-    return val.isDestroyed()
+export function isDestroyed(val: any): boolean {
+    if (isDestroyable(val)) {
+        return val.isDestroyed()
+    } else {
+        return false
+    }
 }
