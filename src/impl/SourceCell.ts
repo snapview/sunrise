@@ -2,9 +2,10 @@ import { Destroyable } from '../interfaces/Destroy'
 import { Recalculable } from '../interfaces/Recalculate'
 import { Cell } from '../interfaces/Cell'
 import { OperationOnDestroyedCellError } from './OperationOnDestroyedCellError'
+import { Updatable } from '../interfaces/Update'
+import { equals } from '../interfaces/Equal'
 
-export class SourceCell<T> implements Cell<T> {
-    // undefined means the cell was destroyed
+export class SourceCell<T> implements Cell<T>, Updatable<T> {
     private val: T
     private destroyed: boolean = false
     private subs = new Set<Recalculable & Destroyable>()
@@ -14,11 +15,7 @@ export class SourceCell<T> implements Cell<T> {
     }
 
     public deref(): T {
-        if (this.destroyed) {
-            throw new OperationOnDestroyedCellError(
-                'Impossible to deref a destroyed cell'
-            )
-        }
+        this.verifyIfDestroyed()
         return this.val
     }
 
@@ -35,11 +32,7 @@ export class SourceCell<T> implements Cell<T> {
     }
 
     public subscribe(subscriber: Recalculable & Destroyable): void {
-        if (this.destroyed) {
-            throw new OperationOnDestroyedCellError(
-                'Impossible to subscribe a destroyed cell'
-            )
-        }
+        this.verifyIfDestroyed()
         this.subs.add(subscriber)
     }
 
@@ -48,47 +41,53 @@ export class SourceCell<T> implements Cell<T> {
     }
 
     public reset(val: T): void {
-        if (this.val === val) return
-        this.val = val
-        this.notifySubscribers()
+        this.verifyIfDestroyed()
+        this.setVal(val)
     }
 
     public swap(fn: (oldVal: T) => T): void {
-        if (this.destroyed) {
-            throw new OperationOnDestroyedCellError(
-                'Impossible to swap a destroyed cell'
-            )
-        }
-        const oldVal = this.val
+        this.verifyIfDestroyed()
         setTimeout(() => {
-            const newVal = fn(oldVal)
-            // STM is implemented here. Apply changes only if the value didn't change while we
-            // were doing calculations. Otherwise start from the very beginning
-            if (oldVal === this.val) {
-                this.reset(newVal)
-            } else {
-                this.swap(fn)
+            let oldVal = this.val
+
+            while (true) {
+                const newVal = fn(oldVal)
+                if (oldVal === this.val) {
+                    this.setVal(newVal)
+                    break
+                } else {
+                    oldVal = this.val
+                }
             }
         }, 0)
     }
 
-    private notifySubscribers(): void {
-        if (this.destroyed) return
-
+    public notifySubscribers(): void {
         for (let subscriber of this.subs) {
             subscriber.recalculate()
+        }
+    }
+
+    public get subscribers(): Set<Recalculable & Destroyable> {
+        return this.subs
+    }
+
+    private setVal(newVal: T) {
+        const oldVal = this.val
+        this.val = newVal
+        if (equals(oldVal, newVal)) return
+        this.notifySubscribers()
+    }
+
+    private verifyIfDestroyed(): void {
+        if (this.destroyed) {
+            throw new OperationOnDestroyedCellError(
+                'Operation is not supported on a destroyed cell'
+            )
         }
     }
 }
 
 export function cell<T>(val: T): SourceCell<T> {
     return new SourceCell(val)
-}
-
-export function reset<T>(val: T, cell: SourceCell<T>): void {
-    cell.reset(val)
-}
-
-export function swap<T>(fn: (oldVal: T) => T, cell: SourceCell<T>): void {
-    cell.swap(fn)
 }

@@ -12,8 +12,9 @@ export {
     subscribe,
     unsubscribe,
 } from './interfaces/Subscribe'
+export { Updatable, reset, swap } from './interfaces/Update'
 export { Cell, Value, isCell } from './interfaces/Cell'
 export { OperationOnDestroyedCellError } from './impl/OperationOnDestroyedCellError'
-export { SourceCell, cell, reset, swap } from './impl/SourceCell'
+export { SourceCell, cell } from './impl/SourceCell'
 export { FormulaCell, formula, map } from './impl/FormulaCell'
 export { history, field, byIndex, toBool, not } from './impl/Formulas'
