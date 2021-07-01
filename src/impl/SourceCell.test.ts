@@ -164,66 +164,29 @@ describe('SourceCell', () => {
                 expect(err).toBeInstanceOf(OperationOnDestroyedCellError)
             }
         })
+
+        test('should properly swap the value', (done) => {
+            const x = new SourceCell(1)
+            x.swap(inc)
+            x.swap((oldVal) => {
+                expect(oldVal).toBe(2)
+                done()
+                return oldVal
+            })
+        })
+
+        test('should keep being consistent in async environment', (done) => {
+            const x = new SourceCell(0)
+            let expected = 0
+            for (let i = 1; i <= 100; i++) {
+                x.swap((oldVal) => oldVal + i)
+                expected += i
+            }
+            x.swap((oldVal) => {
+                expect(oldVal).toBe(expected)
+                done()
+                return oldVal
+            })
+        })
     })
-
-    // test('reset should se')
 })
-
-// describe('SourceCell', () => {
-
-//     it('should be resetable', () => {
-//         const x = cell<number>(1)
-//         expect(deref(x)).toBe(1)
-//         reset(2, x)
-//         expect(deref(x)).toBe(2)
-//     })
-
-//     it('should be swapable', async () => {
-//         const x = cell<number>(1)
-//         expect(deref(x)).toBe(1)
-//         const fn = mockFn(inc)
-//         swap(fn, x)
-//         await fn.expectToBeCalledTimes(1)
-//         expect(deref(x)).toBe(2)
-//     })
-
-//     it('should trigger OperationOnDestroyedCellError when swap the destroyed cell', () => {
-//         const x = cell<number>(1)
-//         destroy(x)
-//         try {
-//             swap(inc, x)
-//             fail('Error should be triggered')
-//         } catch (err) {
-//             expect(err).toBeInstanceOf(OperationOnDestroyedCellError)
-//         }
-//     })
-
-//     // TODO: add tests for STM
-// })
-
-// function mockFn<T>(fn: (...oldVals: T[]) => T) {
-//     let counter = 0
-//     const map: Map<number, () => void> = new Map()
-
-//     const result = (...oldVals: T[]) => {
-//         counter++
-//         const resolve = map.get(counter)
-//         if (resolve) resolve()
-//         map.delete(counter)
-//         return fn(...oldVals)
-//     }
-
-//     result.expectToBeCalledTimes = (times: number) => {
-//         if (times === counter) return Promise.resolve()
-//         if (counter > times)
-//             return Promise.reject(
-//                 `Called ${counter} times, expected to be called ${times} times`
-//             )
-//         const promise = new Promise((resolve) =>
-//             map.set(times, resolve as () => void)
-//         )
-//         return promise
-//     }
-
-//     return result
-// }
