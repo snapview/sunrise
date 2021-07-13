@@ -1,11 +1,9 @@
 import { isCell } from '../interfaces/Cell'
-import { deref } from '../interfaces/Deref'
 import { destroy, Destroyable } from '../interfaces/Destroy'
 import { Recalculable } from '../interfaces/Recalculate'
 import { OperationOnDestroyedCellError } from './OperationOnDestroyedCellError'
-import { cell, SourceCell } from './SourceCell'
-
-const inc = (x: number) => x + 1
+import { SourceCell } from './SourceCell'
+import { inc } from '../TestUtils'
 
 describe('SourceCell', () => {
     test('should be constructable with an initial value', () => {

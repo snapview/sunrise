@@ -6,7 +6,6 @@ import { subscribe, unsubscribe } from '../interfaces/Subscribe'
 import { OperationOnDestroyedCellError } from './OperationOnDestroyedCellError'
 
 export class FormulaCell<T> implements Cell<T>, Recalculable {
-    // undefined means the cell was destroyed
     private val: T
     private destroyed: boolean = false
     private readonly fn: Function
