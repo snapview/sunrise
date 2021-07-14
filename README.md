@@ -84,3 +84,95 @@ const x = cell<number>(1)
 const y = formula((a) => a + 1, x)
 destroy(x) // both x and y are destroyed now
 ```
+
+### Formula Cells
+
+A formula cell is a sort of materialised view of a function. You can look at it as at
+a cell with formula inside in some table processor programm. To create a formula cell
+you need a formula (function) and arbitrary number of source cells as an input
+
+```typescript
+const a = cell<number>(1)
+const b = formula((x) => x + 1, a) // now b is always an increment of a
+deref(b) // 2
+reset(5, a)
+deref(b) // 6
+```
+
+You can also use simple values as input to `formula` instead of cells. This might be
+quite handy in case when you don't know, is the input a cell or just a value
+
+```typescript
+const x = cell<number>(1)
+const y = cell<number>(2)
+const z: number = 3
+
+const sum = formula((a, b, c) => a + b + c, x, y, z)
+deref(sum) // 6
+reset(5, x)
+deref(sum) // 10
+```
+
+#### Predefined formula cells
+
+There are quite some formula cells predefined for faster cell generations
+
+##### Object's field
+
+To extract one field from an object you can use `field` function
+
+```typescript
+const x = cell({ a: 1, b: 2 })
+const fld = field('a', x)
+deref(fld) // 1
+swap((x) => ({ ...x, a: 2 }), x)
+deref(fld) // 2
+```
+
+##### An element of an array
+
+To extract an element from an array by index you can use `byIndex` function.
+The type of the result is `Cell<T | undefined>` because it's not guaranteed
+that the element is presented
+
+```typescript
+const x = cell(['a', 'b', 'c'])
+const el = byIndex(1, x)
+deref(el) // 'b'
+swap((x) => ['z', ...x], x)
+deref(el) // 'a'
+```
+
+##### Convert to boolean
+
+To check that element is truthy you can use `toBool` function.
+
+```typescript
+const x = cell(1)
+deref(toBool(x)) // true
+const y = cell<string | undefined>(undefined)
+deref(toBool(y)) // false
+```
+
+##### Negation
+
+```typescript
+const x = cell<boolean>(true)
+deref(not(x)) // false
+const y = cell(1)
+deref(not(y)) // false
+```
+
+##### History
+
+In some cases it's usefull to have both, the old cell's value and the new one.
+In this case `history` can be used. It serves a tupple with an old and a new
+values inside. Be aware, initially the old value is `undefined`
+
+```typescript
+const x = cell<number>(1)
+const hist = history(x)
+deref(hist) // [1, undefined]
+reset(2, x)
+deref(hist) // [2, 1]
+```
