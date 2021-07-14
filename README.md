@@ -176,3 +176,7 @@ deref(hist) // [1, undefined]
 reset(2, x)
 deref(hist) // [2, 1]
 ```
+
+## License
+
+Sunrise is [MIT licensed](./LICENSE).
