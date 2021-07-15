@@ -1,7 +1,7 @@
 {
     "name": "@snapviewgmbh/sunrise",
-    "version": "0.0.1",
-    "description": "The reactive library for the spreadshit driven development",
+    "version": "0.0.3",
+    "description": "The reactive library for the spreadsheet driven development",
     "main": "lib/index.js",
     "module": "lib/index.esm.js",
     "scripts": {
