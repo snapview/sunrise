@@ -99,7 +99,7 @@ deref(b) // 6
 ```
 
 You can also use simple values as input to `formula` instead of cells. This might be
-quite handy in case when you don't know, is the input a cell or just a value
+quite handy when you don't know if the input is a cell or just a value
 
 ```typescript
 const x = cell<number>(1)
@@ -144,7 +144,7 @@ deref(el) // 'a'
 
 ##### Convert to boolean
 
-To check that element is truthy you can use the `toBool` function.
+To check that an element is truthy you can use the `toBool` function.
 
 ```typescript
 const x = cell(1)
@@ -164,8 +164,8 @@ deref(not(y)) // false
 
 ##### History
 
-In some cases, it's useful to have both, the old cell's value and the new one.
-In this case, `history` can be used. It serves a tuple with old and new
+In some cases, it's useful to have both the old cell's value and the new one.
+For this purpose, `history` can be used. It serves a tuple with the old and new
 values inside. Be aware, initially, the old value is `undefined`
 
 ```typescript
