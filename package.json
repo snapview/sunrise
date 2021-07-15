@@ -1,5 +1,5 @@
 {
-    "name": "sunrise",
+    "name": "@snapviewgmbh/sunrise",
     "version": "0.0.1",
     "description": "The reactive library for the spreadshit driven development",
     "main": "lib/index.js",
