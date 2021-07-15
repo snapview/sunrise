@@ -31,7 +31,7 @@ interface to represent both
 ### All Cells
 
 -   Contain values
--   Implement the `Derefencable` interface and can be dereferenced via the `deref` function
+-   Implement the `Dereferencable` interface and their value can be extracted via the `deref` function
 -   Implement the `Destroyable` interface and can be destroyed via the `destroy` function
 -   Implement the `Subscribable` interface and can be subscribed via the `subscribe` function
     and unsubscribed via the `unsubscribe` function
