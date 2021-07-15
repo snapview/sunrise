@@ -5,7 +5,7 @@ Spreadsheet-like dataflow programming in TypeScript
 ### Example
 
 ```typescript
-import { cell, formula, swap, deref } from '@snapviewgmbh/sunrise'
+import { cell, formula, swap, deref } from '@snapview/sunrise'
 
 const inc = (a) => a + 1
 
