@@ -31,10 +31,10 @@ interface to represent both
 ### All Cells
 
 -   Contain values
--   Implement the `Derefencable` interface and can be dereferenced via `deref` function
--   Implement the `Destroyable` interface and can be destroyed via `destroy` function
--   Implement the `Subscribable` interface and can be subscribed via `subscribe` function
-    and unsubscribed via `unsubscribe` function
+-   Implement the `Derefencable` interface and can be dereferenced via the `deref` function
+-   Implement the `Destroyable` interface and can be destroyed via the `destroy` function
+-   Implement the `Subscribable` interface and can be subscribed via the `subscribe` function
+    and unsubscribed via the `unsubscribe` function
 
 ### Source Cells
 
@@ -75,9 +75,9 @@ deref(a) // 3
 they implement the [Software Transaction Memory](https://en.wikipedia.org/wiki/Software_transactional_memory)
 and they are always consistent.
 
-In case you don't need a cell anymore, the cell can be destroyed with `destroy` function.
-Be carefull because destroying the cell will also destroy all the dependent cells as well.
-After destruction any operation on a cell is illegal and throw the `OperationOnDestroyedCellError`
+In case you don't need a cell anymore, the cell can be destroyed with the `destroy` function.
+Be careful because destroying the cell will also destroy all the dependent cells as well.
+After the destruction, any operation on a cell is illegal, and throw the `OperationOnDestroyedCellError`
 
 ```typescript
 const x = cell<number>(1)
@@ -87,9 +87,8 @@ destroy(x) // both x and y are destroyed now
 
 ### Formula Cells
 
-A formula cell is a sort of materialised view of a function. You can look at it as at
-a cell with formula inside in some table processor programm. To create a formula cell
-you need a formula (function) and arbitrary number of source cells as an input
+A formula cell is a sort of materialized view of a function. You can look at it as a cell with a formula inside in some table processor program. To create a formula cell
+you need a formula (function) and an arbitrary number of source cells as an input
 
 ```typescript
 const a = cell<number>(1)
@@ -119,7 +118,7 @@ There are quite some formula cells predefined for faster cell generations
 
 ##### Object's field
 
-To extract one field from an object you can use `field` function
+To extract one field from an object you can use the `field` function
 
 ```typescript
 const x = cell({ a: 1, b: 2 })
@@ -131,7 +130,7 @@ deref(fld) // 2
 
 ##### An element of an array
 
-To extract an element from an array by index you can use `byIndex` function.
+To extract an element from an array by index you can use the `byIndex` function.
 The type of the result is `Cell<T | undefined>` because it's not guaranteed
 that the element is presented
 
@@ -145,7 +144,7 @@ deref(el) // 'a'
 
 ##### Convert to boolean
 
-To check that element is truthy you can use `toBool` function.
+To check that element is truthy you can use the `toBool` function.
 
 ```typescript
 const x = cell(1)
@@ -165,9 +164,9 @@ deref(not(y)) // false
 
 ##### History
 
-In some cases it's usefull to have both, the old cell's value and the new one.
-In this case `history` can be used. It serves a tupple with an old and a new
-values inside. Be aware, initially the old value is `undefined`
+In some cases, it's useful to have both, the old cell's value and the new one.
+In this case, `history` can be used. It serves a tuple with old and new
+values inside. Be aware, initially, the old value is `undefined`
 
 ```typescript
 const x = cell<number>(1)
