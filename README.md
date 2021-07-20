@@ -178,4 +178,4 @@ deref(hist) // [2, 1]
 
 ## License
 
-Sunrise is [MIT licensed](./LICENSE).
+Sunrise is [MIT licensed](./LICENSE.md).
