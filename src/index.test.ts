@@ -10,8 +10,13 @@ import {
 } from './index'
 import { inc } from './TestUtils'
 
-// @ts-ignore
-global.setTimeout = (fn: Function, timeout?: number) => fn()
+beforeEach(() => {
+    jest.useFakeTimers()
+})
+
+afterEach(() => {
+    jest.useRealTimers()
+})
 
 describe('deref', () => {
     it('should deref a souce cell', () => {
