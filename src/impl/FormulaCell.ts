@@ -65,8 +65,6 @@ export class FormulaCell<T> implements Cell<T>, Recalculable {
     }
 
     private notifySubscribers(): void {
-        if (!this.val) return
-
         for (let subscriber of this.subs) {
             subscriber.recalculate()
         }
