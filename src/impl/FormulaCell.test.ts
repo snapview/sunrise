@@ -115,4 +115,13 @@ describe('FormulaCell', () => {
         const y = map(inc, x)
         expect(y).toBeInstanceOf(FormulaCell)
     })
+
+    it('should use equals function to check should the update be propagated', () => {
+        const x = cell<number>(1)
+        const equals = jest.fn(() => false)
+        const y = map((x) => ({ equals, y: inc(x) }), x)
+        reset(2, x)
+        expect(equals).toBeCalled()
+        expect(y.deref().y).toBe(3)
+    })
 })

@@ -4,6 +4,7 @@ import { Destroyable } from '../interfaces/Destroy'
 import { Recalculable } from '../interfaces/Recalculate'
 import { subscribe, unsubscribe } from '../interfaces/Subscribe'
 import { OperationOnDestroyedCellError } from './OperationOnDestroyedCellError'
+import { equals } from '../interfaces/Equal'
 
 export class FormulaCell<T> implements Cell<T>, Recalculable {
     private val: T
@@ -30,7 +31,7 @@ export class FormulaCell<T> implements Cell<T>, Recalculable {
 
     public recalculate(): T {
         const newVal = this.fn(...this.sources.map(deref))
-        if (newVal === this.val) return this.val
+        if (equals(newVal, this.val)) return this.val
         this.val = newVal
         this.notifySubscribers()
         return this.val
