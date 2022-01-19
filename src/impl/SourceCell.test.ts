@@ -36,8 +36,8 @@ describe('SourceCell', () => {
                 isDestroyed: () => false,
             }
             const x = new SourceCell(1)
-            x.subscribe(subscriber1)
-            x.subscribe(subscriber2)
+            x.addSubscriber(subscriber1)
+            x.addSubscriber(subscriber2)
             destroy(x)
 
             expect(subscriber1.destroy).toBeCalledTimes(1)
@@ -54,7 +54,7 @@ describe('SourceCell', () => {
                 destroy: () => {},
                 isDestroyed: () => false,
             }
-            x.subscribe(subscriber)
+            x.addSubscriber(subscriber)
             expect(x.subscribers.has(subscriber)).toBe(true)
         })
 
@@ -65,8 +65,8 @@ describe('SourceCell', () => {
                 destroy: () => {},
                 isDestroyed: () => false,
             }
-            x.subscribe(subscriber)
-            x.unsubscribe(subscriber)
+            x.addSubscriber(subscriber)
+            x.removeSubscriber(subscriber)
             expect(x.subscribers.has(subscriber)).toBe(false)
         })
     })
@@ -90,8 +90,8 @@ describe('SourceCell', () => {
                 isDestroyed: () => false,
             }
             const x = new SourceCell(1)
-            x.subscribe(subscriber1)
-            x.subscribe(subscriber2)
+            x.addSubscriber(subscriber1)
+            x.addSubscriber(subscriber2)
 
             x.reset(2)
             expect(subscriber1.recalculate).toBeCalled()
@@ -110,8 +110,8 @@ describe('SourceCell', () => {
                 isDestroyed: () => false,
             }
             const x = new SourceCell(1)
-            x.subscribe(subscriber1)
-            x.subscribe(subscriber2)
+            x.addSubscriber(subscriber1)
+            x.addSubscriber(subscriber2)
 
             x.reset(1)
             expect(subscriber1.recalculate).not.toBeCalled()
@@ -131,8 +131,8 @@ describe('SourceCell', () => {
             }
             const val = { equals: (_: any) => true }
             const x = new SourceCell(val)
-            x.subscribe(subscriber1)
-            x.subscribe(subscriber2)
+            x.addSubscriber(subscriber1)
+            x.addSubscriber(subscriber2)
             x.reset(val)
 
             expect(subscriber1.recalculate).not.toBeCalled()

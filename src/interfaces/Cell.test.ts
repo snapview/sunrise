@@ -8,8 +8,8 @@ describe('Cell', () => {
             deref: () => 123,
             destroy: () => {},
             isDestroyed: () => false,
-            subscribe: (_: Recalculable & Destroyable) => {},
-            unsubscribe: (_: Recalculable & Destroyable) => {},
+            addSubscriber: (_: Recalculable & Destroyable) => {},
+            removeSubscriber: (_: Recalculable & Destroyable) => {},
         }
         const y = {}
         const z = 123

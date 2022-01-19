@@ -37,7 +37,7 @@ export class FormulaCell<T> implements Cell<T>, Recalculable {
         return this.val
     }
 
-    public subscribe(subscriber: Recalculable & Destroyable): void {
+    public addSubscriber(subscriber: Recalculable & Destroyable): void {
         if (this.destroyed) {
             throw new OperationOnDestroyedCellError(
                 'Impossible to subscribe a destroyed cell'
@@ -46,7 +46,7 @@ export class FormulaCell<T> implements Cell<T>, Recalculable {
         this.subs.add(subscriber)
     }
 
-    public unsubscribe(subscriber: Recalculable & Destroyable): void {
+    public removeSubscriber(subscriber: Recalculable & Destroyable): void {
         this.subs.delete(subscriber)
     }
 
