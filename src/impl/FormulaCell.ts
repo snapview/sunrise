@@ -10,10 +10,10 @@ export class FormulaCell<T> implements Cell<T>, Recalculable {
     private val: T
     private destroyed: boolean = false
     private readonly fn: Function
-    private readonly sources: (Cell<T> | T)[]
+    private readonly sources: Value<T>[]
     private subs = new Set<Recalculable & Destroyable>()
 
-    constructor(fn: Function, ...sources: (Cell<T> | T)[]) {
+    constructor(fn: Function, ...sources: Value<T>[]) {
         this.fn = fn
         this.sources = sources
         sources.forEach((source) => subscribe(this, source))
