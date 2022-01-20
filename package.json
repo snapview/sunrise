@@ -5,7 +5,7 @@
     "main": "lib/index.js",
     "module": "lib/index.esm.js",
     "scripts": {
-        "test": "jest",
+        "test": "jest src",
         "build": "rollup -c",
         "format": "prettier --write .",
         "prepare": "husky install"
