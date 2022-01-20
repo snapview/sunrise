@@ -17,15 +17,10 @@
     "types": "lib/index.d.ts",
     "keywords": [],
     "author": "Denis Krivosheev",
-    "husky": {
-        "hooks": {
-            "pre-push": "node run test --clean"
-        }
-    },
     "license": "MIT",
     "devDependencies": {
         "@types/jest": "^26.0.23",
-        "husky": "^6.0.0",
+        "husky": "^7.0.4",
         "jest": "^27.0.4",
         "lint-staged": "^11.0.0",
         "prettier": "2.3.1",
