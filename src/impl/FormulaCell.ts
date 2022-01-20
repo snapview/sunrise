@@ -10,10 +10,10 @@ export class FormulaCell<T> implements Cell<T>, Recalculable {
     private val: T
     private destroyed: boolean = false
     private readonly fn: Function
-    private readonly sources: (Cell<T> | T)[]
+    private readonly sources: unknown[]
     private subs = new Set<Recalculable & Destroyable>()
 
-    constructor(fn: Function, ...sources: (Cell<T> | T)[]) {
+    constructor(fn: Function, ...sources: unknown[]) {
         this.fn = fn
         this.sources = sources
         sources.forEach((source) => subscribe(this, source))
@@ -37,7 +37,7 @@ export class FormulaCell<T> implements Cell<T>, Recalculable {
         return this.val
     }
 
-    public subscribe(subscriber: Recalculable & Destroyable): void {
+    public addSubscriber(subscriber: Recalculable & Destroyable): void {
         if (this.destroyed) {
             throw new OperationOnDestroyedCellError(
                 'Impossible to subscribe a destroyed cell'
@@ -46,7 +46,7 @@ export class FormulaCell<T> implements Cell<T>, Recalculable {
         this.subs.add(subscriber)
     }
 
-    public unsubscribe(subscriber: Recalculable & Destroyable): void {
+    public removeSubscriber(subscriber: Recalculable & Destroyable): void {
         this.subs.delete(subscriber)
     }
 
@@ -173,7 +173,7 @@ export function formula<F1, F2, F3, F4, F5, F6, F7, F8, F9, T>(
 ): FormulaCell<T>
 export function formula<T>(
     fn: Function,
-    ...sources: Value<any>[]
+    ...sources: Value<unknown>[]
 ): FormulaCell<T> {
     return new FormulaCell(fn, ...sources)
 }

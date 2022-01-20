@@ -31,12 +31,12 @@ export class SourceCell<T> implements Cell<T>, Updatable<T> {
         return this.destroyed
     }
 
-    public subscribe(subscriber: Recalculable & Destroyable): void {
+    public addSubscriber(subscriber: Recalculable & Destroyable): void {
         this.verifyIfDestroyed()
         this.subs.add(subscriber)
     }
 
-    public unsubscribe(subscriber: Recalculable & Destroyable): void {
+    public removeSubscriber(subscriber: Recalculable & Destroyable): void {
         this.subs.delete(subscriber)
     }
 
