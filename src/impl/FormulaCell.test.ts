@@ -1,8 +1,11 @@
 import { FormulaCell, formula, map } from './FormulaCell'
 import { cell } from './SourceCell'
 import { reset, swap } from '../interfaces/Update'
-import { inc, mockFn, identity, sum, negate } from '../TestUtils'
+import { inc, identity, sum, negate } from '../TestUtils'
 import { OperationOnDestroyedCellError } from './OperationOnDestroyedCellError'
+
+// @ts-ignore
+global.setTimeout = (fn: Function, _?: number) => fn()
 
 describe('FormulaCell', () => {
     it('should be constructable', () => {
@@ -20,32 +23,32 @@ describe('FormulaCell', () => {
 
     it('should be updated only when source value was changed', async () => {
         const x = cell<number>(1)
-        const fn = mockFn(inc)
+        const fn = jest.fn(inc)
         const y = new FormulaCell(fn, x)
-        await fn.expectToBeCalledTimes(1)
+        expect(fn).toBeCalledTimes(1)
         reset(1, x)
-        await fn.expectToBeCalledTimes(1)
+        expect(fn).toBeCalledTimes(1)
         swap(identity, x)
-        await fn.expectToBeCalledTimes(1)
+        expect(fn).toBeCalledTimes(1)
 
         reset(2, x)
-        await fn.expectToBeCalledTimes(2)
+        expect(fn).toBeCalledTimes(2)
         swap(inc, x)
-        await fn.expectToBeCalledTimes(3)
+        expect(fn).toBeCalledTimes(3)
     })
 
     it('multiple sources', async () => {
         const x = cell<number>(1)
         const y = cell<number>(2)
-        const fn = mockFn(sum)
+        const fn = jest.fn(sum)
         const z = new FormulaCell(fn, x, y)
-        await fn.expectToBeCalledTimes(1)
+        expect(fn).toBeCalledTimes(1)
         expect(z.deref()).toBe(3)
         swap(inc, x)
-        await fn.expectToBeCalledTimes(2)
+        expect(fn).toBeCalledTimes(2)
         expect(z.deref()).toBe(4)
         swap(inc, y)
-        await fn.expectToBeCalledTimes(3)
+        expect(fn).toBeCalledTimes(3)
         expect(z.deref()).toBe(5)
     })
 

@@ -4,7 +4,7 @@ import { swap, reset } from '../interfaces/Update'
 import { history, field, toBool, not, byIndex } from './Formulas'
 
 // @ts-ignore
-global.setTimeout = (fn: Function, timeout?: number) => fn()
+global.setTimeout = (fn: Function, _?: number) => fn()
 
 it('history cell', () => {
     const x = cell(1)
