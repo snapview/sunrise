@@ -127,4 +127,25 @@ describe('FormulaCell', () => {
         expect(equals).toBeCalled()
         expect(y.deref().y).toBe(3)
     })
+
+    describe('subscribers', () => {
+        test('dependent formula should be added as a subscriber to the source formula', () => {
+            const sourceCell = cell(1)
+            const sourceFormula = formula(identity, sourceCell)
+
+            const dependentFormula = formula(identity, sourceFormula)
+
+            expect(sourceFormula.subscribers.has(dependentFormula)).toBe(true)
+        })
+
+        test('removeSubscriber should remove the dependent formula from subscribers of to the source formula', () => {
+            const sourceCell = cell(1)
+            const sourceFormula = formula(identity, sourceCell)
+
+            const dependentFormula = formula(identity, sourceFormula)
+            sourceFormula.removeSubscriber(dependentFormula)
+
+            expect(sourceFormula.subscribers.has(dependentFormula)).toBe(false)
+        })
+    })
 })
