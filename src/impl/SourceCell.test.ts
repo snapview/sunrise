@@ -46,8 +46,8 @@ describe('SourceCell', () => {
         })
     })
 
-    describe('subscribe/unsubscribe', () => {
-        test('subscribe should add the subscriber to the list of subscribers', () => {
+    describe('addSubscriber / removeSubscriber', () => {
+        test('addSubscriber should add the subscriber to the list of subscribers', () => {
             const x = new SourceCell(1)
             const subscriber: Recalculable & Destroyable = {
                 recalculate: () => {},
@@ -58,7 +58,7 @@ describe('SourceCell', () => {
             expect(x.subscribers.has(subscriber)).toBe(true)
         })
 
-        test('unsubscribe should remove the subscriber from the list of subscribers', () => {
+        test('removeSubscriber should remove the subscriber from the list of subscribers', () => {
             const x = new SourceCell(1)
             const subscriber: Recalculable & Destroyable = {
                 recalculate: () => {},

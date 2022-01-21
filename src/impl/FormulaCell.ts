@@ -84,6 +84,10 @@ export class FormulaCell<T> implements Cell<T>, Recalculable {
             subscriber.recalculate()
         }
     }
+
+    public get subscribers(): Set<Recalculable & Destroyable> {
+        return this.subs
+    }
 }
 
 export function formula<F1, T>(
