@@ -1,5 +1,5 @@
 import { deref } from '../interfaces/Deref'
-import { Cell, Value } from '../interfaces/Cell'
+import { Cell, isCell, Value } from '../interfaces/Cell'
 import { Destroyable } from '../interfaces/Destroy'
 import { Recalculable } from '../interfaces/Recalculate'
 import { subscribe, unsubscribe } from '../interfaces/Subscribe'
@@ -89,25 +89,25 @@ export class FormulaCell<T> implements Cell<T>, Recalculable {
 export function formula<F1, T>(
     fn: (val1: F1) => T,
     input1: Value<F1>
-): FormulaCell<T>
+): FormulaCell<T> | T
 export function formula<F1, F2, T>(
     fn: (val1: F1, val2: F2) => T,
     input1: Value<F1>,
     input2: Value<F2>
-): FormulaCell<T>
+): FormulaCell<T> | T
 export function formula<F1, F2, F3, T>(
     fn: (val1: F1, val2: F2, val3: F3) => T,
     input1: Value<F1>,
     input2: Value<F2>,
     input3: Value<F3>
-): FormulaCell<T>
+): FormulaCell<T> | T
 export function formula<F1, F2, F3, F4, T>(
     fn: (val1: F1, val2: F2, val3: F3, val4: F4) => T,
     input1: Value<F1>,
     input2: Value<F2>,
     input3: Value<F3>,
     input4: Value<F4>
-): FormulaCell<T>
+): FormulaCell<T> | T
 export function formula<F1, F2, F3, F4, F5, T>(
     fn: (val1: F1, val2: F2, val3: F3, val4: F4, val5: F5) => T,
     input1: Value<F1>,
@@ -115,7 +115,7 @@ export function formula<F1, F2, F3, F4, F5, T>(
     input3: Value<F3>,
     input4: Value<F4>,
     input5: Value<F4>
-): FormulaCell<T>
+): FormulaCell<T> | T
 export function formula<F1, F2, F3, F4, F5, F6, T>(
     fn: (val1: F1, val2: F2, val3: F3, val4: F4, val5: F5, val6: F6) => T,
     input1: Value<F1>,
@@ -124,7 +124,7 @@ export function formula<F1, F2, F3, F4, F5, F6, T>(
     input4: Value<F4>,
     input5: Value<F4>,
     input6: Value<F6>
-): FormulaCell<T>
+): FormulaCell<T> | T
 export function formula<F1, F2, F3, F4, F5, F6, F7, T>(
     fn: (
         val1: F1,
@@ -142,7 +142,7 @@ export function formula<F1, F2, F3, F4, F5, F6, F7, T>(
     input5: Value<F4>,
     input6: Value<F6>,
     input7: Value<F7>
-): FormulaCell<T>
+): FormulaCell<T> | T
 export function formula<F1, F2, F3, F4, F5, F6, F7, F8, T>(
     fn: (
         val1: F1,
@@ -162,7 +162,7 @@ export function formula<F1, F2, F3, F4, F5, F6, F7, F8, T>(
     input6: Value<F6>,
     input7: Value<F7>,
     input8: Value<F8>
-): FormulaCell<T>
+): FormulaCell<T> | T
 export function formula<F1, F2, F3, F4, F5, F6, F7, F8, F9, T>(
     fn: (
         val1: F1,
@@ -184,12 +184,16 @@ export function formula<F1, F2, F3, F4, F5, F6, F7, F8, F9, T>(
     input7: Value<F7>,
     input8: Value<F8>,
     input9: Value<F9>
-): FormulaCell<T>
+): FormulaCell<T> | T
 export function formula<T>(
     fn: Function,
     ...sources: Value<unknown>[]
-): FormulaCell<T> {
-    return new FormulaCell(fn, ...sources)
+): FormulaCell<T> | T {
+    if (sources.some(isCell)) {
+        return new FormulaCell(fn, ...sources)
+    } else {
+        return fn(...sources)
+    }
 }
 
 export const map = formula

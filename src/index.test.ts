@@ -1,3 +1,4 @@
+import { FormulaCell } from './impl/FormulaCell'
 import {
     cell,
     deref,
@@ -85,13 +86,13 @@ describe('subscribe/unsubscribe', () => {
 
     it('subscribe should have no effect on the simple value', () => {
         const x = cell<number>(1)
-        const y = formula(inc, x)
+        const y = new FormulaCell(inc, x)
         subscribe(y, 1)
     })
 
     it('unsubscribe should have no effect on the simple value', () => {
         const x = cell<number>(1)
-        const y = formula(inc, x)
+        const y = new FormulaCell(inc, x)
         unsubscribe(y, 1)
     })
 })
