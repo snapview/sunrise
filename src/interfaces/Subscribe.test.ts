@@ -15,9 +15,9 @@ const subscriber: Recalculable & Destroyable = {
 
 describe('Subscribe', () => {
     test('isSubscribable should check the accordance to Subscribable interface', () => {
-        const x = {
-            subscribe: (_: Recalculable & Destroyable) => {},
-            unsubscribe: (_: Recalculable & Destroyable) => {},
+        const x: Subscribable = {
+            addSubscriber: (_: Recalculable & Destroyable) => {},
+            removeSubscriber: (_: Recalculable & Destroyable) => {},
         }
         const y = {}
         const z = 123
@@ -27,14 +27,14 @@ describe('Subscribe', () => {
         expect(isSubscribable(z)).toBe(false)
     })
 
-    describe('subscribe', () => {
-        test('should trigger subscribe method if applied to a subscribable object', () => {
-            const x = {
-                subscribe: jest.fn((_: Recalculable & Destroyable) => {}),
-                unsubscribe: (_: Recalculable & Destroyable) => {},
+    describe('addSubscriber', () => {
+        test('should trigger addSubscriber method if applied to a subscribable object', () => {
+            const x: Subscribable = {
+                addSubscriber: jest.fn((_: Recalculable & Destroyable) => {}),
+                removeSubscriber: (_: Recalculable & Destroyable) => {},
             }
             subscribe(subscriber, x)
-            expect(x.subscribe).toBeCalledTimes(1)
+            expect(x.addSubscriber).toBeCalledTimes(1)
         })
 
         test('should do nothing if applied to a non-subscribable value', () => {
@@ -42,14 +42,16 @@ describe('Subscribe', () => {
         })
     })
 
-    describe('unsubscribe', () => {
+    describe('removeSubscriber', () => {
         test('should trigger unsubscribe method if applied to a subscribable object', () => {
-            const x = {
-                subscribe: (_: Recalculable & Destroyable) => {},
-                unsubscribe: jest.fn((_: Recalculable & Destroyable) => {}),
+            const x: Subscribable = {
+                addSubscriber: (_: Recalculable & Destroyable) => {},
+                removeSubscriber: jest.fn(
+                    (_: Recalculable & Destroyable) => {}
+                ),
             }
             unsubscribe(subscriber, x)
-            expect(x.unsubscribe).toBeCalledTimes(1)
+            expect(x.removeSubscriber).toBeCalledTimes(1)
         })
 
         test('should do nothing if applied to a non-subscribable value', () => {
