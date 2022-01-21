@@ -1,11 +1,22 @@
 import { FormulaCell, formula, map } from './FormulaCell'
-import { cell } from './SourceCell'
+import { cell, SourceCell } from './SourceCell'
 import { reset, swap } from '../interfaces/Update'
 import { inc, identity, sum, negate } from '../TestUtils'
 import { OperationOnDestroyedCellError } from './OperationOnDestroyedCellError'
+import { deref } from '../interfaces/Deref'
 
 // @ts-ignore
 global.setTimeout = (fn: Function, _?: number) => fn()
+
+const consoleWarn = global.console.warn
+
+beforeEach(() => {
+    global.console.warn = jest.fn()
+})
+
+afterEach(() => {
+    global.console.warn = consoleWarn
+})
 
 describe('FormulaCell', () => {
     it('should be constructable', () => {
@@ -105,6 +116,32 @@ describe('FormulaCell', () => {
         const z = new FormulaCell(fn, y)
         reset(2, x)
         expect(fn).toBeCalledTimes(2)
+    })
+
+    it('should recalculate each subscriber even if some of them throws an error while recalculation', () => {
+        const source: SourceCell<boolean> = cell(false)
+
+        const f1 = jest.fn((throwError: boolean) => {
+            if (throwError) {
+                throw new Error()
+            }
+
+            return throwError
+        })
+        const formula1 = formula(f1, source)
+
+        const f2 = jest.fn(identity)
+        const formula2 = formula(f2, source)
+
+        reset(true, source)
+
+        expect(f1).toBeCalledTimes(2)
+        expect(f2).toBeCalledTimes(2)
+
+        expect(deref(formula1)).toBe(false)
+        expect(deref(formula2)).toBe(true)
+
+        expect(global.console.warn).toBeCalledTimes(1)
     })
 
     it('formula should create an instance of FormulaCell', () => {

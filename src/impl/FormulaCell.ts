@@ -30,7 +30,21 @@ export class FormulaCell<T> implements Cell<T>, Recalculable {
     }
 
     public recalculate(): T {
-        const newVal = this.fn(...this.sources.map(deref))
+        let newVal = this.val
+        const args = this.sources.map(deref)
+        try {
+            newVal = this.fn(...args)
+        } catch (e) {
+            console.warn(
+                'An error\n',
+                e,
+                '\noccurred while recalculating\n',
+                this,
+                '\nwith the following arguments\n',
+                args
+            )
+            return this.val
+        }
         if (equals(newVal, this.val)) return this.val
         this.val = newVal
         this.notifySubscribers()
