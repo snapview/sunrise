@@ -86,104 +86,104 @@ export class FormulaCell<T> implements Cell<T>, Recalculable {
     }
 }
 
-export function formula<F1, T>(
-    fn: (val1: F1) => T,
-    input1: Value<F1>
+export function formula<S1, T>(
+    fn: (val1: S1) => T,
+    input1: Value<S1>
 ): FormulaCell<T> | T
-export function formula<F1, F2, T>(
-    fn: (val1: F1, val2: F2) => T,
-    input1: Value<F1>,
-    input2: Value<F2>
+export function formula<S1, S2, T>(
+    fn: (val1: S1, val2: S2) => T,
+    input1: Value<S1>,
+    input2: Value<S2>
 ): FormulaCell<T> | T
-export function formula<F1, F2, F3, T>(
-    fn: (val1: F1, val2: F2, val3: F3) => T,
-    input1: Value<F1>,
-    input2: Value<F2>,
-    input3: Value<F3>
+export function formula<S1, S2, S3, T>(
+    fn: (val1: S1, val2: S2, val3: S3) => T,
+    input1: Value<S1>,
+    input2: Value<S2>,
+    input3: Value<S3>
 ): FormulaCell<T> | T
-export function formula<F1, F2, F3, F4, T>(
-    fn: (val1: F1, val2: F2, val3: F3, val4: F4) => T,
-    input1: Value<F1>,
-    input2: Value<F2>,
-    input3: Value<F3>,
-    input4: Value<F4>
+export function formula<S1, S2, S3, S4, T>(
+    fn: (val1: S1, val2: S2, val3: S3, val4: S4) => T,
+    input1: Value<S1>,
+    input2: Value<S2>,
+    input3: Value<S3>,
+    input4: Value<S4>
 ): FormulaCell<T> | T
-export function formula<F1, F2, F3, F4, F5, T>(
-    fn: (val1: F1, val2: F2, val3: F3, val4: F4, val5: F5) => T,
-    input1: Value<F1>,
-    input2: Value<F2>,
-    input3: Value<F3>,
-    input4: Value<F4>,
-    input5: Value<F4>
+export function formula<S1, S2, S3, S4, S5, T>(
+    fn: (val1: S1, val2: S2, val3: S3, val4: S4, val5: S5) => T,
+    input1: Value<S1>,
+    input2: Value<S2>,
+    input3: Value<S3>,
+    input4: Value<S4>,
+    input5: Value<S4>
 ): FormulaCell<T> | T
-export function formula<F1, F2, F3, F4, F5, F6, T>(
-    fn: (val1: F1, val2: F2, val3: F3, val4: F4, val5: F5, val6: F6) => T,
-    input1: Value<F1>,
-    input2: Value<F2>,
-    input3: Value<F3>,
-    input4: Value<F4>,
-    input5: Value<F4>,
-    input6: Value<F6>
+export function formula<S1, S2, S3, S4, S5, S6, T>(
+    fn: (val1: S1, val2: S2, val3: S3, val4: S4, val5: S5, val6: S6) => T,
+    input1: Value<S1>,
+    input2: Value<S2>,
+    input3: Value<S3>,
+    input4: Value<S4>,
+    input5: Value<S4>,
+    input6: Value<S6>
 ): FormulaCell<T> | T
-export function formula<F1, F2, F3, F4, F5, F6, F7, T>(
+export function formula<S1, S2, S3, S4, S5, S6, S7, T>(
     fn: (
-        val1: F1,
-        val2: F2,
-        val3: F3,
-        val4: F4,
-        val5: F5,
-        val6: F6,
-        val7: F7
+        val1: S1,
+        val2: S2,
+        val3: S3,
+        val4: S4,
+        val5: S5,
+        val6: S6,
+        val7: S7
     ) => T,
-    input1: Value<F1>,
-    input2: Value<F2>,
-    input3: Value<F3>,
-    input4: Value<F4>,
-    input5: Value<F4>,
-    input6: Value<F6>,
-    input7: Value<F7>
+    input1: Value<S1>,
+    input2: Value<S2>,
+    input3: Value<S3>,
+    input4: Value<S4>,
+    input5: Value<S4>,
+    input6: Value<S6>,
+    input7: Value<S7>
 ): FormulaCell<T> | T
-export function formula<F1, F2, F3, F4, F5, F6, F7, F8, T>(
+export function formula<S1, S2, S3, S4, S5, S6, S7, S8, T>(
     fn: (
-        val1: F1,
-        val2: F2,
-        val3: F3,
-        val4: F4,
-        val5: F5,
-        val6: F6,
-        val7: F7,
-        val8: F8
+        val1: S1,
+        val2: S2,
+        val3: S3,
+        val4: S4,
+        val5: S5,
+        val6: S6,
+        val7: S7,
+        val8: S8
     ) => T,
-    input1: Value<F1>,
-    input2: Value<F2>,
-    input3: Value<F3>,
-    input4: Value<F4>,
-    input5: Value<F4>,
-    input6: Value<F6>,
-    input7: Value<F7>,
-    input8: Value<F8>
+    input1: Value<S1>,
+    input2: Value<S2>,
+    input3: Value<S3>,
+    input4: Value<S4>,
+    input5: Value<S4>,
+    input6: Value<S6>,
+    input7: Value<S7>,
+    input8: Value<S8>
 ): FormulaCell<T> | T
-export function formula<F1, F2, F3, F4, F5, F6, F7, F8, F9, T>(
+export function formula<S1, S2, S3, S4, S5, S6, S7, S8, S9, T>(
     fn: (
-        val1: F1,
-        val2: F2,
-        val3: F3,
-        val4: F4,
-        val5: F5,
-        val6: F6,
-        val7: F7,
-        val8: F8,
-        val9: F9
+        val1: S1,
+        val2: S2,
+        val3: S3,
+        val4: S4,
+        val5: S5,
+        val6: S6,
+        val7: S7,
+        val8: S8,
+        val9: S9
     ) => T,
-    input1: Value<F1>,
-    input2: Value<F2>,
-    input3: Value<F3>,
-    input4: Value<F4>,
-    input5: Value<F4>,
-    input6: Value<F6>,
-    input7: Value<F7>,
-    input8: Value<F8>,
-    input9: Value<F9>
+    input1: Value<S1>,
+    input2: Value<S2>,
+    input3: Value<S3>,
+    input4: Value<S4>,
+    input5: Value<S4>,
+    input6: Value<S6>,
+    input7: Value<S7>,
+    input8: Value<S8>,
+    input9: Value<S9>
 ): FormulaCell<T> | T
 export function formula<T>(
     fn: Function,
