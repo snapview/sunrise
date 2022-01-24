@@ -1,7 +1,7 @@
 import { FormulaCell, formula, map } from './FormulaCell'
 import { cell, SourceCell } from './SourceCell'
 import { reset, swap } from '../interfaces/Update'
-import { inc, identity, sum, negate } from '../TestUtils'
+import { inc, identity, sum, negate, naturalSeq } from '../TestUtils'
 import { OperationOnDestroyedCellError } from './OperationOnDestroyedCellError'
 import { deref } from '../interfaces/Deref'
 
@@ -162,7 +162,19 @@ describe('FormulaCell', () => {
         const y = map((x) => ({ equals, y: inc(x) }), x)
         reset(2, x)
         expect(equals).toBeCalled()
-        expect(y.deref().y).toBe(3)
+        expect(deref(y).y).toBe(3)
+    })
+
+    it('should NOT create a formula cell if no input values are cells', () => {
+        for (let i = 1; i <= 10; i++) {
+            const seq = naturalSeq(0, i)
+
+            // @ts-expect-error typescript can not properly derive type in this context
+            const res = formula(sum, ...seq)
+
+            expect(res).toBe(sum.apply(null, seq))
+            expect(res).not.toBeInstanceOf(FormulaCell)
+        }
     })
 
     describe('subscribers', () => {

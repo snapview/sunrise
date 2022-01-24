@@ -5,7 +5,9 @@ import { FormulaCell, formula } from './FormulaCell'
  * Accepts a cell and creates a cell of tuple [newValue, oldValue]
  * initially oldValue is undefined
  */
-export function history<T>(cell: Value<T>): FormulaCell<[T, T | undefined]> {
+export function history<T>(
+    cell: Value<T>
+): FormulaCell<[T, T | undefined]> | [T, T | undefined] {
     let oldVal: T | undefined = undefined
     return formula((newVal) => {
         const result: [T, T | undefined] = [newVal, oldVal]
@@ -22,20 +24,20 @@ export function field<F, K extends keyof F>(
     fieldName: K,
     fromCell: Cell<F>
 ): FormulaCell<F[K]> {
-    return formula((fromVal) => fromVal[fieldName], fromCell)
+    return new FormulaCell((fromVal: F) => fromVal[fieldName], fromCell)
 }
 
 export function byIndex<T>(
     index: number,
     source: Cell<T[]>
 ): FormulaCell<T | undefined> {
-    return formula((fromVal) => fromVal[index], source)
+    return new FormulaCell((fromVal: T[]) => fromVal[index], source)
 }
 
-export function toBool(source: Cell<any>): FormulaCell<boolean> {
-    return formula((fromVal) => Boolean(fromVal), source)
+export function toBool(source: Cell<unknown>): Value<boolean> {
+    return new FormulaCell((fromVal: unknown) => Boolean(fromVal), source)
 }
 
-export function not(source: Cell<any>): FormulaCell<boolean> {
-    return formula((fromVal) => !Boolean(fromVal), source)
+export function not(source: Cell<unknown>): Value<boolean> {
+    return new FormulaCell((fromVal: unknown) => !Boolean(fromVal), source)
 }
