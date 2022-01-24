@@ -170,7 +170,7 @@ describe('FormulaCell', () => {
             const seq = naturalSeq(0, i)
 
             // @ts-expect-error typescript can not properly derive type in this context
-            const res = formula.apply(null, [sum, ...seq])
+            const res = formula(sum, ...seq)
 
             expect(res).toBe(sum.apply(null, seq))
             expect(res).not.toBeInstanceOf(FormulaCell)
