@@ -118,7 +118,7 @@ export function formula<S1, S2, S3, S4, S5, T>(
     input2: Value<S2>,
     input3: Value<S3>,
     input4: Value<S4>,
-    input5: Value<S4>
+    input5: Value<S5>
 ): FormulaCell<T> | T
 export function formula<S1, S2, S3, S4, S5, S6, T>(
     fn: (val1: S1, val2: S2, val3: S3, val4: S4, val5: S5, val6: S6) => T,
@@ -126,7 +126,7 @@ export function formula<S1, S2, S3, S4, S5, S6, T>(
     input2: Value<S2>,
     input3: Value<S3>,
     input4: Value<S4>,
-    input5: Value<S4>,
+    input5: Value<S5>,
     input6: Value<S6>
 ): FormulaCell<T> | T
 export function formula<S1, S2, S3, S4, S5, S6, S7, T>(
@@ -143,7 +143,7 @@ export function formula<S1, S2, S3, S4, S5, S6, S7, T>(
     input2: Value<S2>,
     input3: Value<S3>,
     input4: Value<S4>,
-    input5: Value<S4>,
+    input5: Value<S5>,
     input6: Value<S6>,
     input7: Value<S7>
 ): FormulaCell<T> | T
@@ -162,7 +162,7 @@ export function formula<S1, S2, S3, S4, S5, S6, S7, S8, T>(
     input2: Value<S2>,
     input3: Value<S3>,
     input4: Value<S4>,
-    input5: Value<S4>,
+    input5: Value<S5>,
     input6: Value<S6>,
     input7: Value<S7>,
     input8: Value<S8>
@@ -183,7 +183,7 @@ export function formula<S1, S2, S3, S4, S5, S6, S7, S8, S9, T>(
     input2: Value<S2>,
     input3: Value<S3>,
     input4: Value<S4>,
-    input5: Value<S4>,
+    input5: Value<S5>,
     input6: Value<S6>,
     input7: Value<S7>,
     input8: Value<S8>,
