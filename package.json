@@ -6,6 +6,7 @@
     "module": "lib/index.esm.js",
     "scripts": {
         "test": "jest src",
+        "test:types": "tsd",
         "build": "rollup -c",
         "format": "prettier --write .",
         "prepare": "husky install"
@@ -27,7 +28,11 @@
         "rollup": "^2.51.2",
         "rollup-plugin-typescript2": "^0.30.0",
         "ts-jest": "^27.0.3",
+        "tsd": "^0.19.1",
         "typescript": "^4.3.2"
+    },
+    "tsd": {
+        "directory": "src"
     },
     "lint-staged": {
         "**/*": "prettier --write --ignore-unknown"
