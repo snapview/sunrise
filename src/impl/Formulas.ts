@@ -1,16 +1,16 @@
 import { Cell, Value } from '../interfaces/Cell'
-import { FormulaCell, formula } from './FormulaCell'
+import { FormulaCell, formula, UnwrapCell } from './FormulaCell'
 
 /**
  * Accepts a cell and creates a cell of tuple [newValue, oldValue]
  * initially oldValue is undefined
  */
-export function history<T>(
-    cell: Value<T>
-): FormulaCell<[T, T | undefined]> | [T, T | undefined] {
-    let oldVal: T | undefined = undefined
-    return formula((newVal) => {
-        const result: [T, T | undefined] = [newVal, oldVal]
+export function history<T extends Value<unknown>, U = UnwrapCell<T>>(
+    cell: T
+): T extends Cell<any> ? FormulaCell<[U, U | undefined]> : [U, U | undefined] {
+    let oldVal: U | undefined = undefined
+    return formula((newVal: U) => {
+        const result: [U, U | undefined] = [newVal, oldVal]
         oldVal = newVal
         return result
     }, cell)

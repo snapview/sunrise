@@ -90,105 +90,299 @@ export class FormulaCell<T> implements Cell<T>, Recalculable {
     }
 }
 
-export function formula<S1, T>(
-    fn: (val1: S1) => T,
-    input1: Value<S1>
-): FormulaCell<T> | T
-export function formula<S1, S2, T>(
-    fn: (val1: S1, val2: S2) => T,
-    input1: Value<S1>,
-    input2: Value<S2>
-): FormulaCell<T> | T
-export function formula<S1, S2, S3, T>(
-    fn: (val1: S1, val2: S2, val3: S3) => T,
-    input1: Value<S1>,
-    input2: Value<S2>,
-    input3: Value<S3>
-): FormulaCell<T> | T
-export function formula<S1, S2, S3, S4, T>(
-    fn: (val1: S1, val2: S2, val3: S3, val4: S4) => T,
-    input1: Value<S1>,
-    input2: Value<S2>,
-    input3: Value<S3>,
-    input4: Value<S4>
-): FormulaCell<T> | T
-export function formula<S1, S2, S3, S4, S5, T>(
-    fn: (val1: S1, val2: S2, val3: S3, val4: S4, val5: S5) => T,
-    input1: Value<S1>,
-    input2: Value<S2>,
-    input3: Value<S3>,
-    input4: Value<S4>,
-    input5: Value<S5>
-): FormulaCell<T> | T
-export function formula<S1, S2, S3, S4, S5, S6, T>(
-    fn: (val1: S1, val2: S2, val3: S3, val4: S4, val5: S5, val6: S6) => T,
-    input1: Value<S1>,
-    input2: Value<S2>,
-    input3: Value<S3>,
-    input4: Value<S4>,
-    input5: Value<S5>,
-    input6: Value<S6>
-): FormulaCell<T> | T
-export function formula<S1, S2, S3, S4, S5, S6, S7, T>(
+export type UnwrapCell<T> = T extends Cell<infer U> ? U : T
+
+export function formula<S1 extends Value<unknown>, T, U1 = UnwrapCell<S1>>(
+    fn: (val1: U1) => T,
+    input1: S1
+): S1 extends Cell<any> ? FormulaCell<T> : T
+export function formula<
+    S1 extends Value<unknown>,
+    S2 extends Value<unknown>,
+    T,
+    U1 = UnwrapCell<S1>,
+    U2 = UnwrapCell<S2>
+>(
+    fn: (val1: U1, val2: U2) => T,
+    input1: S1,
+    input2: S2
+): S1 extends Cell<any>
+    ? FormulaCell<T>
+    : S2 extends Cell<any>
+    ? FormulaCell<T>
+    : T
+export function formula<
+    S1 extends Value<unknown>,
+    S2 extends Value<unknown>,
+    S3 extends Value<unknown>,
+    T,
+    U1 = UnwrapCell<S1>,
+    U2 = UnwrapCell<S2>,
+    U3 = UnwrapCell<S3>
+>(
+    fn: (val1: U1, val2: U2, val3: U3) => T,
+    input1: S1,
+    input2: S2,
+    input3: S3
+): S1 extends Cell<any>
+    ? FormulaCell<T>
+    : S2 extends Cell<any>
+    ? FormulaCell<T>
+    : S3 extends Cell<any>
+    ? FormulaCell<T>
+    : T
+export function formula<
+    S1 extends Value<unknown>,
+    S2 extends Value<unknown>,
+    S3 extends Value<unknown>,
+    S4 extends Value<unknown>,
+    T,
+    U1 = UnwrapCell<S1>,
+    U2 = UnwrapCell<S2>,
+    U3 = UnwrapCell<S3>,
+    U4 = UnwrapCell<S4>
+>(
+    fn: (val1: U1, val2: U2, val3: U3, val4: U4) => T,
+    input1: S1,
+    input2: S2,
+    input3: S3,
+    input4: S4
+): S1 extends Cell<any>
+    ? FormulaCell<T>
+    : S2 extends Cell<any>
+    ? FormulaCell<T>
+    : S3 extends Cell<any>
+    ? FormulaCell<T>
+    : S4 extends Cell<any>
+    ? FormulaCell<T>
+    : T
+export function formula<
+    S1 extends Value<unknown>,
+    S2 extends Value<unknown>,
+    S3 extends Value<unknown>,
+    S4 extends Value<unknown>,
+    S5 extends Value<unknown>,
+    T,
+    U1 = UnwrapCell<S1>,
+    U2 = UnwrapCell<S2>,
+    U3 = UnwrapCell<S3>,
+    U4 = UnwrapCell<S4>,
+    U5 = UnwrapCell<S5>
+>(
+    fn: (val1: U1, val2: U2, val3: U3, val4: U4, val5: U5) => T,
+    input1: S1,
+    input2: S2,
+    input3: S3,
+    input4: S4,
+    input5: S5
+): S1 extends Cell<any>
+    ? FormulaCell<T>
+    : S2 extends Cell<any>
+    ? FormulaCell<T>
+    : S3 extends Cell<any>
+    ? FormulaCell<T>
+    : S4 extends Cell<any>
+    ? FormulaCell<T>
+    : S5 extends Cell<any>
+    ? FormulaCell<T>
+    : T
+export function formula<
+    S1 extends Value<unknown>,
+    S2 extends Value<unknown>,
+    S3 extends Value<unknown>,
+    S4 extends Value<unknown>,
+    S5 extends Value<unknown>,
+    S6 extends Value<unknown>,
+    T,
+    U1 = UnwrapCell<S1>,
+    U2 = UnwrapCell<S2>,
+    U3 = UnwrapCell<S3>,
+    U4 = UnwrapCell<S4>,
+    U5 = UnwrapCell<S5>,
+    U6 = UnwrapCell<S6>
+>(
+    fn: (val1: U1, val2: U2, val3: U3, val4: U4, val5: U5, val6: U6) => T,
+    input1: S1,
+    input2: S2,
+    input3: S3,
+    input4: S4,
+    input5: S5,
+    input6: S6
+): S1 extends Cell<any>
+    ? FormulaCell<T>
+    : S2 extends Cell<any>
+    ? FormulaCell<T>
+    : S3 extends Cell<any>
+    ? FormulaCell<T>
+    : S4 extends Cell<any>
+    ? FormulaCell<T>
+    : S5 extends Cell<any>
+    ? FormulaCell<T>
+    : S6 extends Cell<any>
+    ? FormulaCell<T>
+    : T
+export function formula<
+    S1 extends Value<unknown>,
+    S2 extends Value<unknown>,
+    S3 extends Value<unknown>,
+    S4 extends Value<unknown>,
+    S5 extends Value<unknown>,
+    S6 extends Value<unknown>,
+    S7 extends Value<unknown>,
+    T,
+    U1 = UnwrapCell<S1>,
+    U2 = UnwrapCell<S2>,
+    U3 = UnwrapCell<S3>,
+    U4 = UnwrapCell<S4>,
+    U5 = UnwrapCell<S5>,
+    U6 = UnwrapCell<S6>,
+    U7 = UnwrapCell<S7>
+>(
     fn: (
-        val1: S1,
-        val2: S2,
-        val3: S3,
-        val4: S4,
-        val5: S5,
-        val6: S6,
-        val7: S7
+        val1: U1,
+        val2: U2,
+        val3: U3,
+        val4: U4,
+        val5: U5,
+        val6: U6,
+        val7: U7
     ) => T,
-    input1: Value<S1>,
-    input2: Value<S2>,
-    input3: Value<S3>,
-    input4: Value<S4>,
-    input5: Value<S5>,
-    input6: Value<S6>,
-    input7: Value<S7>
-): FormulaCell<T> | T
-export function formula<S1, S2, S3, S4, S5, S6, S7, S8, T>(
+    input1: S1,
+    input2: S2,
+    input3: S3,
+    input4: S4,
+    input5: S5,
+    input6: S6,
+    input7: S7
+): S1 extends Cell<any>
+    ? FormulaCell<T>
+    : S2 extends Cell<any>
+    ? FormulaCell<T>
+    : S3 extends Cell<any>
+    ? FormulaCell<T>
+    : S4 extends Cell<any>
+    ? FormulaCell<T>
+    : S5 extends Cell<any>
+    ? FormulaCell<T>
+    : S6 extends Cell<any>
+    ? FormulaCell<T>
+    : S7 extends Cell<any>
+    ? FormulaCell<T>
+    : T
+export function formula<
+    S1 extends Value<unknown>,
+    S2 extends Value<unknown>,
+    S3 extends Value<unknown>,
+    S4 extends Value<unknown>,
+    S5 extends Value<unknown>,
+    S6 extends Value<unknown>,
+    S7 extends Value<unknown>,
+    S8 extends Value<unknown>,
+    T,
+    U1 = UnwrapCell<S1>,
+    U2 = UnwrapCell<S2>,
+    U3 = UnwrapCell<S3>,
+    U4 = UnwrapCell<S4>,
+    U5 = UnwrapCell<S5>,
+    U6 = UnwrapCell<S6>,
+    U7 = UnwrapCell<S7>,
+    U8 = UnwrapCell<S8>
+>(
     fn: (
-        val1: S1,
-        val2: S2,
-        val3: S3,
-        val4: S4,
-        val5: S5,
-        val6: S6,
-        val7: S7,
-        val8: S8
+        val1: U1,
+        val2: U2,
+        val3: U3,
+        val4: U4,
+        val5: U5,
+        val6: U6,
+        val7: U7,
+        val8: U8
     ) => T,
-    input1: Value<S1>,
-    input2: Value<S2>,
-    input3: Value<S3>,
-    input4: Value<S4>,
-    input5: Value<S5>,
-    input6: Value<S6>,
-    input7: Value<S7>,
-    input8: Value<S8>
-): FormulaCell<T> | T
-export function formula<S1, S2, S3, S4, S5, S6, S7, S8, S9, T>(
+    input1: S1,
+    input2: S2,
+    input3: S3,
+    input4: S4,
+    input5: S5,
+    input6: S6,
+    input7: S7,
+    input8: S8
+): S1 extends Cell<any>
+    ? FormulaCell<T>
+    : S2 extends Cell<any>
+    ? FormulaCell<T>
+    : S3 extends Cell<any>
+    ? FormulaCell<T>
+    : S4 extends Cell<any>
+    ? FormulaCell<T>
+    : S5 extends Cell<any>
+    ? FormulaCell<T>
+    : S6 extends Cell<any>
+    ? FormulaCell<T>
+    : S7 extends Cell<any>
+    ? FormulaCell<T>
+    : S8 extends Cell<any>
+    ? FormulaCell<T>
+    : T
+export function formula<
+    S1 extends Value<unknown>,
+    S2 extends Value<unknown>,
+    S3 extends Value<unknown>,
+    S4 extends Value<unknown>,
+    S5 extends Value<unknown>,
+    S6 extends Value<unknown>,
+    S7 extends Value<unknown>,
+    S8 extends Value<unknown>,
+    S9 extends Value<unknown>,
+    T,
+    U1 = UnwrapCell<S1>,
+    U2 = UnwrapCell<S2>,
+    U3 = UnwrapCell<S3>,
+    U4 = UnwrapCell<S4>,
+    U5 = UnwrapCell<S5>,
+    U6 = UnwrapCell<S6>,
+    U7 = UnwrapCell<S7>,
+    U8 = UnwrapCell<S8>,
+    U9 = UnwrapCell<S9>
+>(
     fn: (
-        val1: S1,
-        val2: S2,
-        val3: S3,
-        val4: S4,
-        val5: S5,
-        val6: S6,
-        val7: S7,
-        val8: S8,
-        val9: S9
+        val1: U1,
+        val2: U2,
+        val3: U3,
+        val4: U4,
+        val5: U5,
+        val6: U6,
+        val7: U7,
+        val8: U8,
+        val9: U9
     ) => T,
-    input1: Value<S1>,
-    input2: Value<S2>,
-    input3: Value<S3>,
-    input4: Value<S4>,
-    input5: Value<S5>,
-    input6: Value<S6>,
-    input7: Value<S7>,
-    input8: Value<S8>,
-    input9: Value<S9>
-): FormulaCell<T> | T
+    input1: S1,
+    input2: S2,
+    input3: S3,
+    input4: S4,
+    input5: S5,
+    input6: S6,
+    input7: S7,
+    input8: S8,
+    input9: S9
+): S1 extends Cell<any>
+    ? FormulaCell<T>
+    : S2 extends Cell<any>
+    ? FormulaCell<T>
+    : S3 extends Cell<any>
+    ? FormulaCell<T>
+    : S4 extends Cell<any>
+    ? FormulaCell<T>
+    : S5 extends Cell<any>
+    ? FormulaCell<T>
+    : S6 extends Cell<any>
+    ? FormulaCell<T>
+    : S7 extends Cell<any>
+    ? FormulaCell<T>
+    : S8 extends Cell<any>
+    ? FormulaCell<T>
+    : S9 extends Cell<any>
+    ? FormulaCell<T>
+    : T
 export function formula<T>(
     fn: Function,
     ...sources: Value<unknown>[]
