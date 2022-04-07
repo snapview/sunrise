@@ -18,3 +18,4 @@ export { OperationOnDestroyedCellError } from './impl/OperationOnDestroyedCellEr
 export { SourceCell, cell } from './impl/SourceCell'
 export { FormulaCell, formula, map } from './impl/FormulaCell'
 export { history, field, byIndex, toBool, not } from './impl/Formulas'
+export { Equal, equals } from './interfaces/Equal'
