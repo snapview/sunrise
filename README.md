@@ -67,7 +67,7 @@ it and swap the cell to the new value
 const a = cell<number>(1)
 reset(2, a)
 deref(a) // 2
-swap((x) => x + 1)
+swap((x) => x + 1, a)
 deref(a) // 3
 ```
 
