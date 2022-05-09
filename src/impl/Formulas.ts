@@ -37,10 +37,10 @@ export function byIndex<T>(
     return new FormulaCell((fromVal: T[]) => fromVal[index], source)
 }
 
-export function toBool(source: Cell<unknown>): Value<boolean> {
+export function toBool(source: Cell<unknown>): FormulaCell<boolean> {
     return new FormulaCell((fromVal: unknown) => Boolean(fromVal), source)
 }
 
-export function not(source: Cell<unknown>): Value<boolean> {
+export function not(source: Cell<unknown>): FormulaCell<boolean> {
     return new FormulaCell((fromVal: unknown) => !Boolean(fromVal), source)
 }
