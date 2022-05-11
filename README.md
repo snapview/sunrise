@@ -1,5 +1,9 @@
 # Sunrise
 
+[![npm version](https://img.shields.io/npm/v/%40snapview%2Fsunrise?label=version&logo=npm)](https://www.npmjs.com/package/%40snapview%2Fsunrise)
+[![npm bundle size (scoped)](https://img.shields.io/bundlephobia/min/@snapview/sunrise?logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACSUlEQVRYw%2B2XP2gTcRTH459BEKSiQkH8%2FcmlaUpJEESECpKh0IKiU2b%2FDNKxDkrp0rjZUXBSHERcBEEX7eRQhVKcBBfrIgriYDEoorVJzs%2FL%2FdpexbSXXq4g3MHjLne%2F3%2Ft%2B3vu9y%2B9dJhPjsNb2G5O9YUzBZLbrKJVKexG9qLV9aYz9zPW01mbRGPM0m82eqVarOxMRRuAEorc5f0X4CdGfrVQqu4Jn5T3cP8%2F9eew9UBO5XO5QbNF8Pn8QZ1eI8A3i78SxMYO9G83xPO8YMHcBqXF%2BwO%2BhjkQlhUwcwcHDwIm9R7SnOs%2FY0R6Ax5m%2FgL3mekyWb6OC0gy6TqQfsVcygTTui5tF3%2Fd3UBvDBPVIlg%2Fft7TuG1g3iBT7QSHZmwwuJlXALOlhCVKKVzRXimvKATSgewHA8aQAqIcjStnHaNVFU2DCAA7CNLEvwFzt1hIENSWFbBpKtTT8dgBhE5A6xDNbKcJisbhfKe8aPmqhwNZpbAawCqKUXnZZmYz4Gsob9NsJt%2FUdFSBsDef4OfPOlcvl3Wt%2FRN4FAN%2FyfOlf0XYLIGw%2FmVsLXivzg%2BtfnfqICxDbUoAUIAVIAVKAFoDriGrBBmKXkxalH5BmpEng3%2F5qy%2FQQe%2F%2Bs61bqUXe06Nba0ptBh913uu1%2BLr0%2BgyfJxqcuZKXhWj12Sn2%2F428F%2BsO86%2BGW1pxFj5Z0f6BBudyVhhKnl4BZ2CQrreVjfZ8JfCKdbaFQOKC1dweI70A1XXakqBYRnVr5XNuWA9FRQOaU6j%2BZ%2BV%2BPP5ZRWPOOMBtbAAAAAElFTkSuQmCC)](https://bundlephobia.com/package/%40snapview%2Fsunrise)
+[![unit-tests](https://github.com/snapview/sunrise/workflows/unit-tests/badge.svg?branch=master)](https://github.com/snapview/sunrise/actions?query=branch%3Amaster+workflow%3Aunit-tests)
+
 Spreadsheet-like dataflow programming in TypeScript
 
 ### Example
