@@ -9,6 +9,7 @@
         "test:types": "tsd",
         "build": "rollup -c",
         "format": "prettier --write .",
+        "format:check": "prettier --check .",
         "prepare": "husky install"
     },
     "files": [
