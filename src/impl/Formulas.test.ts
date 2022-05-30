@@ -27,8 +27,8 @@ it('field cell', () => {
 })
 
 it('byIndex cell', () => {
-    const x = cell<number[]>([1, 2, 3])
-    const i = byIndex<number>(0, x)
+    const x = cell([1, 2, 3])
+    const i = byIndex(0, x)
     expect(deref(i)).toBe(1)
 })
 

@@ -5,8 +5,9 @@
     "main": "lib/index.js",
     "module": "lib/index.esm.js",
     "scripts": {
-        "test": "jest src",
+        "test:unit": "jest src",
         "test:types": "tsd",
+        "test": "npm run test:unit && npm run build && npm run test:types",
         "build": "rollup -c",
         "format": "prettier --write .",
         "format:check": "prettier --check .",
