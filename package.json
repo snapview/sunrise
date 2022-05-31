@@ -21,6 +21,11 @@
     "keywords": [],
     "author": "Denis Krivosheev",
     "license": "MIT",
+    "homepage": "https://github.com/snapview/sunrise#readme",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/snapview/sunrise.git"
+    },
     "devDependencies": {
         "@types/jest": "^26.0.23",
         "husky": "^7.0.4",
