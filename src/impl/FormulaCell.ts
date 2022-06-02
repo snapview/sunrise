@@ -91,17 +91,18 @@ export class FormulaCell<T> implements Cell<T>, Recalculable {
 }
 
 export type UnwrapCell<T> = T extends Cell<infer U> ? U : T
+type InferReturn<T> = T extends (...args: any[]) => infer U ? U : never
 
 export function formula<
     T1 extends Value<unknown>,
     FN extends (val1: UnwrapCell<T1>) => unknown,
-    R = FN extends (...args: any[]) => infer T ? T : never
+    R = InferReturn<FN>
 >(fn: FN, input1: T1): T1 extends Cell<any> ? FormulaCell<R> : R
 export function formula<
     T1 extends Value<unknown>,
     T2 extends Value<unknown>,
     FN extends (val1: UnwrapCell<T1>, val2: UnwrapCell<T2>) => unknown,
-    R = FN extends (...args: any[]) => infer T ? T : never
+    R = InferReturn<FN>
 >(
     fn: FN,
     input1: T1,
@@ -120,7 +121,7 @@ export function formula<
         val2: UnwrapCell<T2>,
         val3: UnwrapCell<T3>
     ) => unknown,
-    R = FN extends (...args: any[]) => infer T ? T : never
+    R = InferReturn<FN>
 >(
     fn: FN,
     input1: T1,
@@ -144,7 +145,7 @@ export function formula<
         val3: UnwrapCell<T3>,
         val4: UnwrapCell<T4>
     ) => unknown,
-    R = FN extends (...args: any[]) => infer T ? T : never
+    R = InferReturn<FN>
 >(
     fn: FN,
     input1: T1,
@@ -173,7 +174,7 @@ export function formula<
         val4: UnwrapCell<T4>,
         val5: UnwrapCell<T5>
     ) => unknown,
-    R = FN extends (...args: any[]) => infer T ? T : never
+    R = InferReturn<FN>
 >(
     fn: FN,
     input1: T1,
@@ -207,7 +208,7 @@ export function formula<
         val5: UnwrapCell<T5>,
         val6: UnwrapCell<T6>
     ) => unknown,
-    R = FN extends (...args: any[]) => infer T ? T : never
+    R = InferReturn<FN>
 >(
     fn: FN,
     input1: T1,
@@ -246,7 +247,7 @@ export function formula<
         val6: UnwrapCell<T6>,
         val7: UnwrapCell<T7>
     ) => unknown,
-    R = FN extends (...args: any[]) => infer T ? T : never
+    R = InferReturn<FN>
 >(
     fn: FN,
     input1: T1,
@@ -290,7 +291,7 @@ export function formula<
         val7: UnwrapCell<T7>,
         val8: UnwrapCell<T8>
     ) => unknown,
-    R = FN extends (...args: any[]) => infer T ? T : never
+    R = InferReturn<FN>
 >(
     fn: FN,
     input1: T1,
@@ -339,7 +340,7 @@ export function formula<
         val8: UnwrapCell<T8>,
         val9: UnwrapCell<T9>
     ) => unknown,
-    R = FN extends (...args: any[]) => infer T ? T : never
+    R = InferReturn<FN>
 >(
     fn: FN,
     input1: T1,

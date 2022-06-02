@@ -4,7 +4,7 @@ Normal commits will only be tested by CI - nothing more. To trigger publishing
 to npm, you need to push [a tagged
 commit](https://git-scm.com/book/en/v2/Git-Basics-Tagging).
 
-Here is who you do this:
+Here is how you do this:
 
 -   increment version
     -   patch
