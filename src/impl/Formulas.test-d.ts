@@ -158,9 +158,7 @@ import {
     expectType<FormulaCell<number | boolean | undefined>>(field(s1, recCell))
     expectType<FormulaCell<number | boolean | undefined>>(field(s2, recCell))
     // Notice: non-existing key Symbol('c')
-    expectType<FormulaCell<number | boolean | undefined>>(
-        field(Symbol('c'), recCell)
-    )
+    expectType<FormulaCell<number | boolean | undefined>>(field(Symbol('c'), recCell))
 
     // cannot pass key of wrong type
     expectError(field(1, recCell))

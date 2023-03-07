@@ -1,11 +1,6 @@
 import { Destroyable } from './Destroy'
 import { Recalculable } from './Recalculate'
-import {
-    Subscribable,
-    isSubscribable,
-    subscribe,
-    unsubscribe,
-} from './Subscribe'
+import { Subscribable, isSubscribable, subscribe, unsubscribe } from './Subscribe'
 
 const subscriber: Recalculable & Destroyable = {
     recalculate: () => {},
@@ -46,9 +41,7 @@ describe('Subscribe', () => {
         test('should trigger unsubscribe method if applied to a subscribable object', () => {
             const x: Subscribable = {
                 addSubscriber: (_: Recalculable & Destroyable) => {},
-                removeSubscriber: jest.fn(
-                    (_: Recalculable & Destroyable) => {}
-                ),
+                removeSubscriber: jest.fn((_: Recalculable & Destroyable) => {}),
             }
             unsubscribe(subscriber, x)
             expect(x.removeSubscriber).toBeCalledTimes(1)
