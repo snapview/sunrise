@@ -1,0 +1,6 @@
+# see https://git-scm.com/docs/git-blame#Documentation/git-blame.txt---ignore-revs-fileltfilegt
+
+# Prettier change:
+#   "trailingComma": "es5" -> "all";
+#   "printWidth": 80 -> 100;
+f6326cffe7c08ee5755c3c4f46a27458165b1553
