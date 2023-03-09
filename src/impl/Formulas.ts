@@ -7,10 +7,8 @@ type HistoryResult<T> = [T, T | undefined]
  * initially oldValue is undefined
  */
 export function history<T extends Value<unknown>>(
-    cell: T
-): T extends Cell<any>
-    ? FormulaCell<HistoryResult<UnwrapCell<T>>>
-    : HistoryResult<UnwrapCell<T>> {
+    cell: T,
+): T extends Cell<any> ? FormulaCell<HistoryResult<UnwrapCell<T>>> : HistoryResult<UnwrapCell<T>> {
     let oldVal: UnwrapCell<T> | undefined = undefined
     return formula((newVal: UnwrapCell<T>) => {
         const result: HistoryResult<UnwrapCell<T>> = [newVal, oldVal]
@@ -36,12 +34,10 @@ type IsRecord<T> = string extends keyof T
  */
 export function field<T extends Value<unknown>, K extends keyof UnwrapCell<T>>(
     fieldName: K,
-    fromCell: T
+    fromCell: T,
 ): T extends Cell<any>
     ? FormulaCell<
-          IsRecord<UnwrapCell<T>> extends true
-              ? UnwrapCell<T>[K] | undefined
-              : UnwrapCell<T>[K]
+          IsRecord<UnwrapCell<T>> extends true ? UnwrapCell<T>[K] | undefined : UnwrapCell<T>[K]
       >
     : IsRecord<UnwrapCell<T>> extends true
     ? UnwrapCell<T>[K] | undefined
@@ -51,21 +47,19 @@ export function field<T extends Value<unknown>, K extends keyof UnwrapCell<T>>(
 
 export function byIndex<T extends Value<unknown[]>, U extends number>(
     index: U,
-    source: T
-): T extends Cell<any>
-    ? FormulaCell<UnwrapCell<T>[U] | undefined>
-    : UnwrapCell<T>[U] | undefined {
+    source: T,
+): T extends Cell<any> ? FormulaCell<UnwrapCell<T>[U] | undefined> : UnwrapCell<T>[U] | undefined {
     return formula((fromVal) => fromVal[index], source)
 }
 
 export function toBool<T extends Value<unknown>>(
-    source: T
+    source: T,
 ): T extends Cell<any> ? FormulaCell<boolean> : boolean {
     return formula((fromVal) => Boolean(fromVal), source)
 }
 
 export function not<T extends Value<unknown>>(
-    source: T
+    source: T,
 ): T extends Cell<any> ? FormulaCell<boolean> : boolean {
     return formula((fromVal) => !Boolean(fromVal), source)
 }

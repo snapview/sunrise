@@ -11,16 +11,10 @@ export function isSubscribable(val: any): val is Subscribable {
     return hasMethods<Subscribable>(val, ['addSubscriber', 'removeSubscriber'])
 }
 
-export function subscribe(
-    subscriber: Recalculable & Destroyable,
-    val: any
-): void {
+export function subscribe(subscriber: Recalculable & Destroyable, val: any): void {
     if (isSubscribable(val)) val.addSubscriber(subscriber)
 }
 
-export function unsubscribe(
-    subscriber: Recalculable & Destroyable,
-    val: any
-): void {
+export function unsubscribe(subscriber: Recalculable & Destroyable, val: any): void {
     if (isSubscribable(val)) val.removeSubscriber(subscriber)
 }

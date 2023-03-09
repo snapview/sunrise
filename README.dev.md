@@ -35,3 +35,17 @@ Here is how you do this:
      * [new tag]         v0.0.9 -> v0.0.9
 
     ```
+
+## Format the code
+
+### ignore-revs-file
+
+Sometimes (after long and bloody discussions) we decide to change `.prettierrc.json`. It leads to a huge commit,
+as `Prettier` automatically reformats all the project files in a pre-commit hook. This commit has no use for git-blame,
+so we'd like to ignore it, i.e. see the blame of previous commit for strings affected by reformatting.
+Here comes [.git-blame-ignore-revs](./.git-blame-ignore-revs) file where we list such commits.  
+To make it work in your local repo, run
+
+```shell
+git config blame.ignoreRevsFile .git-blame-ignore-revs
+```

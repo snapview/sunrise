@@ -31,14 +31,7 @@ import { FormulaCell, Cell, SourceCell, cell, map } from '../index'
     const justString = 'a'
 
     // functions passed to map
-    const mapFn = (
-        n1: number,
-        n2: number,
-        n3: number,
-        s1: string,
-        s2: string,
-        s3: string
-    ) =>
+    const mapFn = (n1: number, n2: number, n3: number, s1: string, s2: string, s3: string) =>
         [
             Math.round(n1) + Math.round(n2) + Math.round(n3),
             s1.toUpperCase() + s2.toUpperCase() + s3.toUpperCase(),
@@ -49,7 +42,7 @@ import { FormulaCell, Cell, SourceCell, cell, map } from '../index'
         n3: boolean,
         s1: string,
         s2: string,
-        s3: string
+        s3: string,
     ) =>
         [
             Math.round(n1) + Math.round(n2) + (n3 ? 1 : 2),
@@ -61,7 +54,7 @@ import { FormulaCell, Cell, SourceCell, cell, map } from '../index'
         n3: number,
         s1: string,
         s2: string,
-        s3: boolean
+        s3: boolean,
     ) =>
         [
             Math.round(n1) + Math.round(n2) + Math.round(n3),
@@ -76,7 +69,7 @@ import { FormulaCell, Cell, SourceCell, cell, map } from '../index'
         justNumber,
         stringCell,
         formulaStringCell,
-        justString
+        justString,
     )
     const allFormulaInput = map(
         mapFn,
@@ -85,7 +78,7 @@ import { FormulaCell, Cell, SourceCell, cell, map } from '../index'
         formulaNumberCell,
         formulaStringCell,
         formulaStringCell,
-        formulaStringCell
+        formulaStringCell,
     )
     const allCellInput = map(
         mapFn,
@@ -94,7 +87,7 @@ import { FormulaCell, Cell, SourceCell, cell, map } from '../index'
         numberCell,
         stringCell,
         stringCell,
-        stringCell
+        stringCell,
     )
     const allRawInput = map(
         mapFn,
@@ -103,7 +96,7 @@ import { FormulaCell, Cell, SourceCell, cell, map } from '../index'
         justNumber,
         justString,
         justString,
-        justString
+        justString,
     )
 
     // tests
@@ -125,8 +118,8 @@ import { FormulaCell, Cell, SourceCell, cell, map } from '../index'
             justNumber,
             stringCell,
             formulaStringCell,
-            justString
-        )
+            justString,
+        ),
     )
     expectError(
         map(
@@ -136,7 +129,7 @@ import { FormulaCell, Cell, SourceCell, cell, map } from '../index'
             justNumber,
             stringCell,
             formulaStringCell,
-            justString
-        )
+            justString,
+        ),
     )
 }

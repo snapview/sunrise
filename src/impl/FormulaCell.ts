@@ -22,9 +22,7 @@ export class FormulaCell<T> implements Cell<T>, Recalculable {
 
     public deref(): T {
         if (this.destroyed) {
-            throw new OperationOnDestroyedCellError(
-                'Impossible to deref a destroyed cell'
-            )
+            throw new OperationOnDestroyedCellError('Impossible to deref a destroyed cell')
         }
         return this.val
     }
@@ -41,7 +39,7 @@ export class FormulaCell<T> implements Cell<T>, Recalculable {
                 '\noccurred while recalculating\n',
                 this,
                 '\nwith the following arguments\n',
-                args
+                args,
             )
             return this.val
         }
@@ -53,9 +51,7 @@ export class FormulaCell<T> implements Cell<T>, Recalculable {
 
     public addSubscriber(subscriber: Recalculable & Destroyable): void {
         if (this.destroyed) {
-            throw new OperationOnDestroyedCellError(
-                'Impossible to subscribe a destroyed cell'
-            )
+            throw new OperationOnDestroyedCellError('Impossible to subscribe a destroyed cell')
         }
         this.subs.add(subscriber)
     }
@@ -96,37 +92,29 @@ type InferReturn<T> = T extends (...args: any[]) => infer U ? U : never
 export function formula<
     T1 extends Value<unknown>,
     FN extends (val1: UnwrapCell<T1>) => unknown,
-    R = InferReturn<FN>
+    R = InferReturn<FN>,
 >(fn: FN, input1: T1): T1 extends Cell<any> ? FormulaCell<R> : R
 export function formula<
     T1 extends Value<unknown>,
     T2 extends Value<unknown>,
     FN extends (val1: UnwrapCell<T1>, val2: UnwrapCell<T2>) => unknown,
-    R = InferReturn<FN>
->(
-    fn: FN,
-    input1: T1,
-    input2: T2
-): T1 extends Cell<any>
-    ? FormulaCell<R>
-    : T2 extends Cell<any>
-    ? FormulaCell<R>
-    : R
-export function formula<
-    T1 extends Value<unknown>,
-    T2 extends Value<unknown>,
-    T3 extends Value<unknown>,
-    FN extends (
-        val1: UnwrapCell<T1>,
-        val2: UnwrapCell<T2>,
-        val3: UnwrapCell<T3>
-    ) => unknown,
-    R = InferReturn<FN>
+    R = InferReturn<FN>,
 >(
     fn: FN,
     input1: T1,
     input2: T2,
-    input3: T3
+): T1 extends Cell<any> ? FormulaCell<R> : T2 extends Cell<any> ? FormulaCell<R> : R
+export function formula<
+    T1 extends Value<unknown>,
+    T2 extends Value<unknown>,
+    T3 extends Value<unknown>,
+    FN extends (val1: UnwrapCell<T1>, val2: UnwrapCell<T2>, val3: UnwrapCell<T3>) => unknown,
+    R = InferReturn<FN>,
+>(
+    fn: FN,
+    input1: T1,
+    input2: T2,
+    input3: T3,
 ): T1 extends Cell<any>
     ? FormulaCell<R>
     : T2 extends Cell<any>
@@ -143,15 +131,15 @@ export function formula<
         val1: UnwrapCell<T1>,
         val2: UnwrapCell<T2>,
         val3: UnwrapCell<T3>,
-        val4: UnwrapCell<T4>
+        val4: UnwrapCell<T4>,
     ) => unknown,
-    R = InferReturn<FN>
+    R = InferReturn<FN>,
 >(
     fn: FN,
     input1: T1,
     input2: T2,
     input3: T3,
-    input4: T4
+    input4: T4,
 ): T1 extends Cell<any>
     ? FormulaCell<R>
     : T2 extends Cell<any>
@@ -172,16 +160,16 @@ export function formula<
         val2: UnwrapCell<T2>,
         val3: UnwrapCell<T3>,
         val4: UnwrapCell<T4>,
-        val5: UnwrapCell<T5>
+        val5: UnwrapCell<T5>,
     ) => unknown,
-    R = InferReturn<FN>
+    R = InferReturn<FN>,
 >(
     fn: FN,
     input1: T1,
     input2: T2,
     input3: T3,
     input4: T4,
-    input5: T5
+    input5: T5,
 ): T1 extends Cell<any>
     ? FormulaCell<R>
     : T2 extends Cell<any>
@@ -206,9 +194,9 @@ export function formula<
         val3: UnwrapCell<T3>,
         val4: UnwrapCell<T4>,
         val5: UnwrapCell<T5>,
-        val6: UnwrapCell<T6>
+        val6: UnwrapCell<T6>,
     ) => unknown,
-    R = InferReturn<FN>
+    R = InferReturn<FN>,
 >(
     fn: FN,
     input1: T1,
@@ -216,7 +204,7 @@ export function formula<
     input3: T3,
     input4: T4,
     input5: T5,
-    input6: T6
+    input6: T6,
 ): T1 extends Cell<any>
     ? FormulaCell<R>
     : T2 extends Cell<any>
@@ -245,9 +233,9 @@ export function formula<
         val4: UnwrapCell<T4>,
         val5: UnwrapCell<T5>,
         val6: UnwrapCell<T6>,
-        val7: UnwrapCell<T7>
+        val7: UnwrapCell<T7>,
     ) => unknown,
-    R = InferReturn<FN>
+    R = InferReturn<FN>,
 >(
     fn: FN,
     input1: T1,
@@ -256,7 +244,7 @@ export function formula<
     input4: T4,
     input5: T5,
     input6: T6,
-    input7: T7
+    input7: T7,
 ): T1 extends Cell<any>
     ? FormulaCell<R>
     : T2 extends Cell<any>
@@ -289,9 +277,9 @@ export function formula<
         val5: UnwrapCell<T5>,
         val6: UnwrapCell<T6>,
         val7: UnwrapCell<T7>,
-        val8: UnwrapCell<T8>
+        val8: UnwrapCell<T8>,
     ) => unknown,
-    R = InferReturn<FN>
+    R = InferReturn<FN>,
 >(
     fn: FN,
     input1: T1,
@@ -301,7 +289,7 @@ export function formula<
     input5: T5,
     input6: T6,
     input7: T7,
-    input8: T8
+    input8: T8,
 ): T1 extends Cell<any>
     ? FormulaCell<R>
     : T2 extends Cell<any>
@@ -338,9 +326,9 @@ export function formula<
         val6: UnwrapCell<T6>,
         val7: UnwrapCell<T7>,
         val8: UnwrapCell<T8>,
-        val9: UnwrapCell<T9>
+        val9: UnwrapCell<T9>,
     ) => unknown,
-    R = InferReturn<FN>
+    R = InferReturn<FN>,
 >(
     fn: FN,
     input1: T1,
@@ -351,7 +339,7 @@ export function formula<
     input6: T6,
     input7: T7,
     input8: T8,
-    input9: T9
+    input9: T9,
 ): T1 extends Cell<any>
     ? FormulaCell<R>
     : T2 extends Cell<any>
@@ -371,10 +359,7 @@ export function formula<
     : T9 extends Cell<any>
     ? FormulaCell<R>
     : R
-export function formula<T>(
-    fn: Function,
-    ...sources: Value<unknown>[]
-): FormulaCell<T> | T {
+export function formula<T>(fn: Function, ...sources: Value<unknown>[]): FormulaCell<T> | T {
     if (sources.some(isCell)) {
         return new FormulaCell(fn, ...sources)
     } else {

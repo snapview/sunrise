@@ -82,7 +82,7 @@ export class SourceCell<T> implements Cell<T>, Updatable<T> {
     private verifyIfDestroyed(): void {
         if (this.destroyed) {
             throw new OperationOnDestroyedCellError(
-                'Operation is not supported on a destroyed cell'
+                'Operation is not supported on a destroyed cell',
             )
         }
     }

@@ -4,9 +4,7 @@ export interface Dereferencable<T> {
     deref(): T
 }
 
-export function isDereferencable<T>(
-    val: Dereferencable<T> | T
-): val is Dereferencable<T> {
+export function isDereferencable<T>(val: Dereferencable<T> | T): val is Dereferencable<T> {
     return hasMethods<Dereferencable<T>>(val, ['deref'])
 }
 
